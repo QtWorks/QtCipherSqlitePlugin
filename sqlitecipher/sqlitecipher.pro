@@ -19,12 +19,12 @@ INSTALLS += target
 
 HEADERS  += \
     $$PWD/sqlitecipher_p.h \
-    $$PWD/qsqlcachedresult_p.h \
+    $$PWD/sqlcachedresult_p.h \
     $$PWD/sqlitecipher_global.h
 SOURCES  += \
     $$PWD/smain.cpp \
     $$PWD/sqlitecipher.cpp \
-    $$PWD/qsqlcachedresult.cpp
+    $$PWD/sqlcachedresult.cpp
 OTHER_FILES += SqliteCipherDriverPlugin.json
 
 !system-sqlite:!contains( LIBS, .*sqlite.* ) {

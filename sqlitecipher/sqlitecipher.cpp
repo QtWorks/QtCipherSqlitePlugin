@@ -45,7 +45,7 @@
 #include <QSqlQuery>
 #include <QVariant>
 
-#include "qsqlcachedresult_p.h"
+#include "sqlcachedresult_p.h"
 #include "sqlitecipher_p.h"
 
 #if defined Q_OS_WIN
@@ -115,7 +115,7 @@ static QSqlError qMakeError(sqlite3 *access, const QString &descr, QSqlError::Er
 
 class SQLiteResultPrivate;
 
-class SQLiteResult : public QSqlCachedResult
+class SQLiteResult : public SqlCachedResult
 {
     friend class SQLiteCipherDriver;
     friend class SQLiteResultPrivate;
@@ -125,7 +125,7 @@ public:
     QVariant handle() const;
 
 protected:
-    bool gotoNext(QSqlCachedResult::ValueCache& row, int idx);
+    bool gotoNext(SqlCachedResult::ValueCache& row, int idx);
     bool reset(const QString &query);
     bool prepare(const QString &query);
     bool exec();
@@ -156,7 +156,7 @@ class SQLiteResultPrivate
 public:
     SQLiteResultPrivate(SQLiteResult *res);
     void cleanup();
-    bool fetchNext(QSqlCachedResult::ValueCache &values, int idx, bool initialFetch);
+    bool fetchNext(SqlCachedResult::ValueCache &values, int idx, bool initialFetch);
     // initializes the recordInfo and the cache
     void initColumns(bool emptyResultset);
     void finalize();
@@ -248,7 +248,7 @@ void SQLiteResultPrivate::initColumns(bool emptyResultset)
     }
 }
 
-bool SQLiteResultPrivate::fetchNext(QSqlCachedResult::ValueCache &values, int idx, bool initialFetch)
+bool SQLiteResultPrivate::fetchNext(SqlCachedResult::ValueCache &values, int idx, bool initialFetch)
 {
     int res;
     int i;
@@ -350,7 +350,7 @@ bool SQLiteResultPrivate::fetchNext(QSqlCachedResult::ValueCache &values, int id
 }
 
 SQLiteResult::SQLiteResult(const SQLiteCipherDriver* db)
-    : QSqlCachedResult(db)
+    : SqlCachedResult(db)
 {
     d = new SQLiteResultPrivate(this);
     d->access = db->d->access;
@@ -369,7 +369,7 @@ SQLiteResult::~SQLiteResult()
 void SQLiteResult::virtual_hook(int id, void *data)
 {
 #if (QT_VERSION >= 0x050000)
-    QSqlCachedResult::virtual_hook(id, data);
+    SqlCachedResult::virtual_hook(id, data);
 #else
     switch (id) {
     case QSqlResult::DetachFromResultSet:
@@ -377,7 +377,7 @@ void SQLiteResult::virtual_hook(int id, void *data)
             sqlite3_reset(d->stmt);
         break;
     default:
-        QSqlCachedResult::virtual_hook(id, data);
+        SqlCachedResult::virtual_hook(id, data);
     }
 #endif
 }
@@ -516,7 +516,7 @@ bool SQLiteResult::exec()
     return true;
 }
 
-bool SQLiteResult::gotoNext(QSqlCachedResult::ValueCache& row, int idx)
+bool SQLiteResult::gotoNext(SqlCachedResult::ValueCache& row, int idx)
 {
     return d->fetchNext(row, idx, false);
 }

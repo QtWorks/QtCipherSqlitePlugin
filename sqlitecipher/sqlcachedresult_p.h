@@ -37,8 +37,8 @@
 **
 ****************************************************************************/
 
-#ifndef QSQLCACHEDRESULT_H
-#define QSQLCACHEDRESULT_H
+#ifndef SQLCACHEDRESULT_H
+#define SQLCACHEDRESULT_H
 
 #include <QSqlResult>
 
@@ -53,17 +53,17 @@ QT_BEGIN_NAMESPACE
 class QVariant;
 template <typename T> class QVector;
 
-class QSqlCachedResultPrivate;
+class SqlCachedResultPrivate;
 
-class QSqlCachedResult : public QSqlResult
+class SqlCachedResult : public QSqlResult
 {
 public:
-    virtual ~QSqlCachedResult();
+    virtual ~SqlCachedResult();
 
     typedef QVector<QVariant> ValueCache;
 
 protected:
-    QSqlCachedResult(const QSqlDriver * db);
+    SqlCachedResult(const QSqlDriver * db);
 
     void init(int colCount);
     void cleanup();
@@ -87,7 +87,7 @@ protected:
     void setNumericalPrecisionPolicy(QSql::NumericalPrecisionPolicy policy) DECL_OVERRIDE;
 private:
     bool cacheNext();
-    QSqlCachedResultPrivate *d;
+    SqlCachedResultPrivate *d;
 };
 
 QT_END_NAMESPACE
@@ -96,4 +96,4 @@ QT_END_NAMESPACE
 QT_END_HEADER
 #endif
 
-#endif // QSQLCACHEDRESULT_H
+#endif // SQLCACHEDRESULT_H

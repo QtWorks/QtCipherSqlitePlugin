@@ -672,6 +672,7 @@ bool SQLiteCipherDriver::open(const QString & db, const QString &, const QString
             case OPEN_WITH_KEY:
             {
                 CHECK_SQLITE_KEY;
+                break;
             }
             case CREATE_KEY:
             {

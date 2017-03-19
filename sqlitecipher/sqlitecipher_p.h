@@ -37,12 +37,12 @@
 **
 ****************************************************************************/
 
-#ifndef QSQLITEDRIVER_H
-#define QSQLITEDRIVER_H
+#ifndef SQLITECIHPERDRIVER_H
+#define SQLITECIHPERDRIVER_H
 
 #include <QtSql/QSqlDriver>
 
-#include "sqlitechipher_global.h"
+#include "sqlitecipher_global.h"
 
 struct sqlite3;
 
@@ -59,16 +59,16 @@ QT_BEGIN_HEADER
 QT_BEGIN_NAMESPACE
 
 class QSqlResult;
-class QSQLiteDriverPrivate;
+class SQLiteCipherDriverPrivate;
 
-class Q_EXPORT_SQLDRIVER_SQLITE QSQLiteDriver : public QSqlDriver
+class Q_EXPORT_SQLDRIVER_SQLITE SQLiteCipherDriver : public QSqlDriver
 {
     Q_OBJECT
-    friend class QSQLiteResult;
+    friend class SQLiteResult;
 public:
-    explicit QSQLiteDriver(QObject *parent = 0);
-    explicit QSQLiteDriver(sqlite3 *connection, QObject *parent = 0);
-    ~QSQLiteDriver();
+    explicit SQLiteCipherDriver(QObject *parent = 0);
+    explicit SQLiteCipherDriver(sqlite3 *connection, QObject *parent = 0);
+    ~SQLiteCipherDriver();
     bool hasFeature(DriverFeature f) const DECL_OVERRIDE;
     bool open(const QString & db,
                    const QString & user,
@@ -89,7 +89,7 @@ public:
     QString escapeIdentifier(const QString &identifier, IdentifierType) const DECL_OVERRIDE;
 
 private:
-    QSQLiteDriverPrivate *d;
+    SQLiteCipherDriverPrivate *d;
 };
 
 QT_END_NAMESPACE
@@ -98,4 +98,4 @@ QT_END_NAMESPACE
 QT_END_HEADER
 #endif
 
-#endif // QSQLITEDRIVER_H
+#endif // SQLITECIHPERDRIVER_H

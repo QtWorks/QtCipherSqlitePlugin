@@ -12,7 +12,7 @@ android {
 
 QT      *= core sql
 
-CONFIG  += c++11
+CONFIG  += c++11 plugin
 
 include($$PWD/sqlite3/sqlite3.pri)
 

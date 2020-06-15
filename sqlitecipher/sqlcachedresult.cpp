@@ -45,7 +45,6 @@ QT_BEGIN_NAMESPACE
    SqlCachedResult is a convenience class for databases that only allow
    forward only fetching. It will cache all the results so we can iterate
    backwards over the results again.
-
    All you need to do is to inherit from SqlCachedResult and reimplement
    gotoNext(). gotoNext() will have a reference to the internal cache and
    will give you an index where you can start filling in your data. Special
